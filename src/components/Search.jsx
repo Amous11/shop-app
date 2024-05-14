@@ -9,19 +9,12 @@ export default function Search({ setArticles }) {
     let input = event.target.value.replace(/\s+/g, " ").trim();
     setInput(input);
 
-    if (!input) {
-      const savedArticles = localStorage.getItem("articles");
-      if (savedArticles) {
-        setArticles(JSON.parse(savedArticles));
-      }
-    } else {
-      const articles = JSON.parse(localStorage.getItem("articles"));
-      const filteredArticles = articles.filter((e) =>
-        e.title.toLowerCase().includes(input.toLowerCase())
-      );
+    const articles = JSON.parse(sessionStorage.getItem("articles"));
+    const filteredArticles = articles.filter((e) =>
+      e.title.toLowerCase().includes(input.toLowerCase())
+    );
 
-      setArticles(filteredArticles);
-    }
+    setArticles(filteredArticles);
   };
 
   return (

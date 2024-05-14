@@ -13,7 +13,7 @@ export function Store() {
       .then((res) => res.json())
       .then((json) => {
         setArticles(json);
-        localStorage.setItem("articles", JSON.stringify(json));
+        sessionStorage.setItem("articles", JSON.stringify(json));
       });
   }, []);
 

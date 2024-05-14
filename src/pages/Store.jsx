@@ -9,12 +9,18 @@ export function Store() {
   // const categoryFilter = "/category";
 
   useEffect(() => {
-    fetch(apiString)
-      .then((res) => res.json())
-      .then((json) => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(apiString);
+        const json = await response.json();
         setArticles(json);
         sessionStorage.setItem("articles", JSON.stringify(json));
-      });
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (

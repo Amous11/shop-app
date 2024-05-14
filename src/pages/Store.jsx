@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
-import {
-  Col,
-  Row,
-  Button,
-  Form,
-  InputGroup,
-  FloatingLabel,
-} from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { StoreItem } from "../components/StoreItem";
+import Search from "../components/Search";
 
 export function Store() {
   const [articles, setArticles] = useState([]);
@@ -23,29 +17,10 @@ export function Store() {
       });
   }, []);
 
-  const handleInput = (event) => {
-    let input = event.target.value.replace(/\s+/g, " ").trim();
-
-    if (!input) {
-      const savedArticles = localStorage.getItem("articles");
-      if (savedArticles) {
-        setArticles(JSON.parse(savedArticles));
-      }
-    } else {
-      const filteredArticles = articles.filter((e) =>
-        e.title.toLowerCase().includes(input.toLowerCase())
-      );
-
-      setArticles(filteredArticles);
-    }
-  };
-
   return (
     <>
       <h1>Store</h1>
-      <FloatingLabel controlId="searchInput" label="Search" className="mb-3">
-        <Form.Control type="text" placeholder="Search" onChange={handleInput} />
-      </FloatingLabel>
+      <Search setArticles={setArticles} />
 
       <Row md={2} xs={1} lg={3} className="g-3">
         {articles.map((item) => (
@@ -57,4 +32,3 @@ export function Store() {
     </>
   );
 }
-// search bar (real time), filter, insert. stepper
